@@ -10,12 +10,12 @@
 const searchUser = document.getElementById('searchUser');
 const profile = document.querySelector('#profile');
 searchUser.addEventListener('keyup', (e) => {
-   //user = e.target.value;
-   getUser('rafaello104');
+   user = e.target.value;
+   getUser(user);
 });
 
 function getUser(UI){
-  fetch(`https://api.github.com/users/${UI}`)
+  fetch(`https://api.github.com/users/${UI}?client_id=ca0b4c9e2ca6a2a9ea7c&client_secret=a7fa2b536f9760ebffae2422548b20839a5ed295`)
   .then(response =>response.json())
   .then(data =>{
     console.log(data);
@@ -31,7 +31,7 @@ function getUser(UI){
       <a href="${user.html_url}" target="_blank" class="btn btn-primary btn-block">View Profile</a>
     </div>
     <div class="col-md-9">
-      <span class="badge badge-primary">Repo public: {user.repos}</span>
+      <span class="badge badge-primary">Repo public: ${user.repos}</span>
       <span class="badge badge-success">Followers: ${user.followers}</span>
       <span class="badge badge-info">Following: ${user.following}</span>
       <br><br>
@@ -56,6 +56,7 @@ class User{
     this.blog = data.blog;
     this.location = data.location;
     this.created_at = data.created_at;
+    this.repos = data.public_repos;
   }
 }
 
