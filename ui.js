@@ -3,6 +3,8 @@ import getUserInfo from './github.js';
 
 export default async function call(searchValue){
   const data = await getUserInfo(searchValue);
+  console.log(data);
+  for(let [key,value] of Object.entries(data)){ console.log(`${key} = ${value}`);}
   makeProfile(data);
   }
 function makeProfile(user){
