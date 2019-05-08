@@ -16,14 +16,9 @@ searchUser.addEventListener('keyup', (e) => {
 
 function getUser(UI){
   fetch(`https://api.github.com/users/${UI}?client_id=ca0b4c9e2ca6a2a9ea7c&client_secret=a7fa2b536f9760ebffae2422548b20839a5ed295`)
-  .then(response =>response.json())
-  .then(data =>{
-    console.log(data);
-     user = new User(data);
-     console.log(user);
-     return user;
-  })
+  .then(user =>user.json())
   .then(user =>{
+    console.log(user);
     profile.innerHTML = `<div class="  card card-body mb-3">
     <div class="row">
     <div class="col-md-3">
@@ -31,7 +26,7 @@ function getUser(UI){
       <a href="${user.html_url}" target="_blank" class="btn btn-primary btn-block">View Profile</a>
     </div>
     <div class="col-md-9">
-      <span class="badge badge-primary">Repo public: ${user.repos}</span>
+      <span class="badge badge-primary">Repo public: ${user.public_repos}</span>
       <span class="badge badge-success">Followers: ${user.followers}</span>
       <span class="badge badge-info">Following: ${user.following}</span>
       <br><br>
@@ -46,19 +41,3 @@ function getUser(UI){
     </div>`;
   })
 }
-class User{
-  constructor(data){
-    this.avatar_url = data.avatar_url;
-    this.html_url = data.html_url;
-    this.followers = data.followers;
-    this.following = data.following;
-    this.company = data.company;
-    this.blog = data.blog;
-    this.location = data.location;
-    this.created_at = data.created_at;
-    this.repos = data.public_repos;
-  }
-}
-
-
-
