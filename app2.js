@@ -1,5 +1,5 @@
 import call from './ui.js';
-
+import makeProfile from './ui.js';
 let user ='';
 
 const searchUser = document.getElementById('searchUser');
@@ -9,9 +9,7 @@ searchUser.addEventListener('keyup', (e) => {
 
  });
 
+const Madalina = 'AlexandraMadalina';
 
-/*async function call(searchValue){
-const data = await getUserInfo(searchValue);
-console.log(data); 
-}*/
 
+call(Madalina);
