@@ -1,43 +1,15 @@
-/* becode/javascript
- * 
- *
- * coded by kevin@BeCode
- * started at 7/05/2019
- */
-//Simple startup code
-//let user = '';
+import call from './ui.js';
+
+let user ='';
 
 const searchUser = document.getElementById('searchUser');
-const profile = document.querySelector('#profile');
 searchUser.addEventListener('keyup', (e) => {
-   user = e.target.value;
-   getUser(user);
-});
+    user = e.target.value;
+   call(user);
 
-function getUser(UI){
-  fetch(`https://api.github.com/users/${UI}?client_id=ca0b4c9e2ca6a2a9ea7c&client_secret=a7fa2b536f9760ebffae2422548b20839a5ed295`)
-  .then(user =>user.json())
-  .then(user =>{
-    console.log(user);
-    profile.innerHTML = `<div class="  card card-body mb-3">
-    <div class="row">
-    <div class="col-md-3">
-      <img class="img-fluid mb-2" src="${user.avatar_url}">
-      <a href="${user.html_url}" target="_blank" class="btn btn-primary btn-block">View Profile</a>
-    </div>
-    <div class="col-md-9">
-      <span class="badge badge-primary">Repo public: ${user.public_repos}</span>
-      <span class="badge badge-success">Followers: ${user.followers}</span>
-      <span class="badge badge-info">Following: ${user.following}</span>
-      <br><br>
-      <ul class="list-group">
-        <li class="list-group-item">Company:${user.company}</li>
-        <li class="list-group-item">Website/Blog: <a href="${user.blog}">${user.blog} </a></li>
-        <li class="list-group-item">Location: ${user.location}</li>
-        <li class="list-group-item">Member Since: ${user.created_at}</li>
-      </ul>
-    </div>
-    </div>
-    </div>`;
-  })
-}
+ });
+
+const Madalina = 'AlexandraMadalina';
+
+
+call(Madalina);

@@ -4,17 +4,20 @@ import {
 } from './github.js';
 
 let profile = document.createElement('x-profile');
+const repoContainer = document.createElement('x-repoContainer');
 
 const container = document.querySelector('#profile');
 export default async function call(searchValue) {
-  const data = await getUserInfo(searchValue);
- console.log(data);
-  const repos = await getRepo(data.login, data.public_repos);
-  
-  makeProfile(data,repos);
+  getUserInfo(searchValue)
+    .then(data => {
+      getRepo(data.login, data.public_repos)
+        .then(repos => {
+          makeProfile(data, repos);
+        })
+    });
 }
 
-function makeProfile(user,repositories) {
+function makeProfile(user, repositories) {
   container.appendChild(profile);
   profile.innerHTML = `<div class="  card card-body mb-3">
   <div class="row">
@@ -36,12 +39,9 @@ function makeProfile(user,repositories) {
   </div>
   </div>
   </div>`
-  
-  
-  console.log(repositories);
- /* for (let i = 0; 1<repositories.length; ++i){
+
+  for (let i = 0; i < repositories.length; ++i) {
     let repo = document.createElement('x-repo');
-    //console.log(`${repositories[i].html_url} : ${i} : ${repositories.length}`);
     repo.innerHTML = ` <div class="card card-body mb-2">
     <div class="row">
       <div class="col-md-6">
@@ -54,6 +54,7 @@ function makeProfile(user,repositories) {
       </div>
     </div>
   </div>`
-  container.appendChild(repo);
-  }*/
+    repoContainer.appendChild(repo);
+  }
+  container.appendChild(repoContainer);
 }
